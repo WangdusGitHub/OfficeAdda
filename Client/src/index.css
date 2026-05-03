@@ -1,0 +1,138 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-primary-50: #f0f4ff;
+  --color-primary-100: #e0e9ff;
+  --color-primary-200: #c7d7fe;
+  --color-primary-300: #a5bafd;
+  --color-primary-400: #8193fa;
+  --color-primary-500: #6366f1;
+  --color-primary-600: #4f46e5;
+  --color-primary-700: #4338ca;
+  --color-primary-800: #3730a3;
+  --color-primary-900: #312e81;
+
+  --animate-fade-in: fadeIn 0.4s ease-out;
+  --animate-slide-up: slideUp 0.4s ease-out;
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slideUp {
+    from { transform: translateY(16px); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
+}
+
+/* ─── Base ─────────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { -webkit-font-smoothing: antialiased; }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    @apply bg-white text-slate-800
+           dark:bg-[#0a0c10] dark:text-slate-200;
+  }
+}
+
+/* ─── Components ────────────────────────────────────────────── */
+@layer components {
+
+  /* Card and legacy alias */
+  .card, .glass-card, .table-container, .stat-card {
+    @apply bg-[#f0f2f5] border border-slate-200 rounded-2xl
+           dark:bg-[#141820] dark:border-slate-800;
+  }
+
+  /* Primary button */
+  .btn-primary {
+    @apply inline-flex items-center gap-2
+           px-4 py-2 text-sm font-semibold text-white
+           bg-primary-600 hover:bg-primary-700
+           rounded-xl border border-primary-700/40
+           shadow-sm transition-all duration-150
+           active:scale-[0.98] focus:outline-none
+           focus-visible:ring-2 focus-visible:ring-primary-500/40;
+  }
+
+  /* Secondary button */
+  .btn-secondary {
+    @apply inline-flex items-center gap-2
+           px-4 py-2 text-sm font-semibold text-slate-700
+           bg-white hover:bg-slate-50
+           dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700
+           rounded-xl border border-slate-200 dark:border-slate-700
+           shadow-sm transition-all duration-150 active:scale-[0.98];
+  }
+
+  /* Icon button */
+  .btn-icon {
+    @apply p-2 rounded-lg text-slate-500
+           hover:bg-slate-100 dark:hover:bg-slate-800
+           transition-colors duration-150;
+  }
+
+  /* Input & Select */
+  .input-field, .select-field {
+    @apply w-full px-3 py-2 text-sm text-slate-800
+           bg-white border border-slate-200 rounded-xl outline-none
+           placeholder:text-slate-400
+           focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20
+           transition-all duration-150
+           dark:bg-slate-800/60 dark:border-slate-700 dark:text-slate-200
+           dark:placeholder:text-slate-500
+           dark:focus:border-primary-500 dark:focus:ring-primary-500/20;
+  }
+
+  /* Select specific */
+  .select-field {
+    @apply appearance-none cursor-pointer;
+  }
+
+  /* Badge */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5
+           text-xs font-semibold rounded-full;
+  }
+
+  /* Table wrapper */
+  .table-container {
+    @apply overflow-hidden;
+  }
+
+  /* Section header */
+  .page-header {
+    @apply flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6;
+  }
+  .page-title {
+    @apply text-2xl font-bold tracking-tight text-slate-900 dark:text-white;
+  }
+  .page-subtitle {
+    @apply text-sm text-slate-500 dark:text-slate-400 mt-0.5;
+  }
+
+  /* Divider */
+  .divider {
+    @apply border-t border-slate-100 dark:border-slate-800;
+  }
+
+  /* Stat card */
+  .stat-card {
+    @apply p-5 flex flex-col gap-3 hover:shadow-md transition-shadow duration-200;
+  }
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { @apply bg-transparent; }
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 dark:bg-slate-700 rounded-full;
+}
